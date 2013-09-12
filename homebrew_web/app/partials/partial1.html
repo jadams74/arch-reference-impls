@@ -1,0 +1,65 @@
+<p></p>
+<h2>Recipe Browser</h2>
+<p>
+ <div class="span2"> 
+      Search: <input ng-model="query">
+      Sort by:
+      <select ng-model="orderProp">
+        <option value="name">Name</option>
+        <option value="style">Style</option>
+      </select>
+  </div>
+<div>
+     <ul class="list-group">
+    <li class="list-group-item" ng-repeat="recipe in recipes | filter:query | orderBy:orderProp">
+      <div class="row">
+        <div class="col-lg-6"><h2>{{recipe.name}}</h2></div>
+        <div class="col-lg-3"><h2>{{recipe.style}}</h2></div>
+        <div class="col-lg-3"><h2>{{recipe.recipeType}}</h2></div>
+
+        <div class="col-lg-2"><span class="label label-default">ABV</span></div>
+        <div class="col-lg-2">{{recipe.alcoholByVolume}}</div>
+        <div class="col-lg-2"><span class="label label-default">OG&nbsp;</span></div>
+        <div class="col-lg-2">{{recipe.originalGravity}}</div>
+        <div class="col-lg-2"><span class="label label-default">FG&nbsp;</span></div>
+        <div class="col-lg-2">{{recipe.finalGravity}}</div>
+
+        <div class="col-lg-2"><span class="label label-default">IBU</span></div>
+        <div class="col-lg-2">{{recipe.internationalBitternessUnits}}</div>
+        <div class="col-lg-2"><span class="label label-default">SRM</span></div>
+        <div class="col-lg-2">{{recipe.standardReferenceMethod}}</div>
+        <div class="col-lg-4">&nbsp;</div>
+
+        <div class="col-lg-12">{{recipe.description}}</div>
+
+        <div class="col-lg-4">
+          <h4>Fermentables</h4>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="fermentable in recipe.fermentables">
+              <div class="col-lg-12">{{fermentable}}</div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h4>Hoping</h4>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="hop in recipe.hops">
+              <div class="col-lg-12">{{hop}}</div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h4>Recommended Yeast</h4>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="yeas in recipe.yeast">
+              <div class="col-lg-12">{{yeas}}</div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <br>
+    </li>
+  </ul>
+  </div>
+<p>

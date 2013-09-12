@@ -1,0 +1,133 @@
+[
+    {
+        "_id": null,
+        "name": "Belgian Dark Strong Ale",
+        "description": "A dark, strong and malty belgian ale.  Similar to Chimay Blue Label, this is an intermediatestyle that will require a starter or multiple yeast packages. ",
+        "originalGravity": "1.089",
+        "finalGravity": "1.019",
+        "internationalBitternessUnits": "34",
+        "standardReferenceMethod": "22",
+        "alcoholByVolume": "9.5",
+        "style": "Belgian Dark",
+        "recipeType": "Extract",
+        "boilTime": "60",
+        "fermentables": [
+            "7 lbs Pilsner liquid malt extract",
+            "2 lbs Munich liquid malt extract"
+        ],
+        "hops": [
+            "1.7 oz Mt. Hood (60 min)"
+        ],
+        "yeast": [
+            "WLP500",
+            "WYEAST 1762",
+            "Safebrew T-54"
+        ],
+        "otherIngredients": []
+    },
+    {
+        "_id": null,
+        "name": "Coal Train Porter",
+        "description": "Named by a local Pastor for the train that keeps the Castle Rock residents awake on cool summer nights, this porter is a smooth drinker.  This porter is unique in using Blackprinz malt, a debittered black malt which provides a soft roasted flavor without the bitterness and astringency.  The flavors will be both mellow, smooth and very complex.",
+        "originalGravity": "1.058",
+        "finalGravity": "1.058",
+        "internationalBitternessUnits": "39",
+        "standardReferenceMethod": "39",
+        "alcoholByVolume": "5.75",
+        "style": "Porter",
+        "recipeType": "All Grain",
+        "boilTime": "1 hour",
+        "fermentables": [
+            "8 lbs 8 oz Marris Otter",
+            "2 lbs Munich I",
+            "6 oz Special B Malt",
+            "6 oz Crystal 40 Malt",
+            "4 oz Chocolate Malt",
+            "8 oz Blackprinz Malt"
+        ],
+        "hops": [
+            "1.5 oz Kent Golding (60 min)",
+            "0.75 oz Kent Golding (5 min)"
+        ],
+        "yeast": [
+            "WYEAST 1335",
+            "WYEAST 1028",
+            "WYEAST 1056",
+            "WYEAST 1275",
+            "WYEAST 1450",
+            "Dry S-04"
+        ],
+        "otherIngredients": []
+    },
+    {
+        "_id": null,
+        "name": "American Amber Ale",
+        "description": "This American style has both strong caramel malt characteristic and plenty of hops flavor and aroma. Using just a single type of hops and a heavy dose of Victory allows the brewer to appreciate these ingredients.",
+        "originalGravity": "1.049",
+        "finalGravity": "1.012",
+        "internationalBitternessUnits": "34",
+        "standardReferenceMethod": "11",
+        "alcoholByVolume": "5.10",
+        "style": "Amber Ale",
+        "recipeType": "Extract",
+        "boilTime": "1 hour",
+        "fermentables": [
+            "6 lbs Golde Light LME",
+            "1 lb Munich LME",
+            "12 oz. Victory Malt",
+            "12 oz. Crystal 40 Malt",
+            "12 oz. Crystal 80 Malt"
+        ],
+        "hops": [
+            "1.0 oz. Williamette (60 min)",
+            "0.5 oz. Williamette (15 min)",
+            "0.5 oz. Williamette (2 min)"
+        ],
+        "yeast": [
+            "WYEAST 1056",
+            "WYEAST 1272",
+            "WYEAST 1332",
+            "WYEAST 1318",
+            "WLP001",
+            "WLP008",
+            "WLP029",
+            "WLP036",
+            "WLP051",
+            "Dry US-05"
+        ],
+        "otherIngredients": []
+    },
+    {
+        "_id": null,
+        "name": "Caracrystal Kolsch",
+        "description": "A small twist on a Cologne beer. The addition of caracrystal wheat malt adds a slightly reddish gue and a hint of sweetness to the styles of typical hints of fruit and crisp finish.",
+        "originalGravity": "1.045",
+        "finalGravity": "1.009",
+        "internationalBitternessUnits": "22",
+        "standardReferenceMethod": "5",
+        "alcoholByVolume": "4.9",
+        "style": "Light Ale",
+        "recipeType": "All Grain",
+        "boilTime": "1 hour",
+        "fermentables": [
+            "8.25 lbs Pilsner Malt",
+            "1.25 lbs Wheat Malt",
+            "7 oz. Caracrystal Wheat"
+        ],
+        "hops": [
+            "1.0 oz. Tettnager Hops (60 min)",
+            "0.5 oz. Spalt Hops (30 min)",
+            "0.5 oz. Spalt Hops (5 min)"
+        ],
+        "yeast": [
+            "WYEAST 2565 Kolsch",
+            "WYEAST 1007 Kolsch",
+            "WYEAST 1010 Kolsch",
+            "WLP029",
+            "WLP011",
+            "WLP036",
+            "Dry not recommended"
+        ],
+        "otherIngredients": []
+    }
+]
