@@ -1,9 +1,0 @@
-databaseUser: jadams
-databasePassword: pUk3sta1n
-databaseServerAddress: 127.0.0.1
-databasePort: 27017
-databaseName: homeBrewDb
-recipesCollectionName: recipes
-
-http:
-  port: 9000
