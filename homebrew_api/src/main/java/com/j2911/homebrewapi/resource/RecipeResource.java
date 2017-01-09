@@ -37,30 +37,40 @@ public class RecipeResource extends HomebrewResource {
         return builder.build();
     }
 
+
     @GET
     @Timed
-    public Response getRecipes(){
+    public Response getRecipes(@QueryParam("limit") @DefaultValue("20") int limit,
+                               @QueryParam("offset") @DefaultValue("0") int offset){
         Response response = null;
 
-        try{
-            List<Recipe> recipes = homebrewDao.findAll();
-            buildResponse(Response.Status.OK, recipes);
-        }
-        catch(Exception ex){
-            logger.error(ex.getMessage());
-            response = buildResponse(Response.Status.INTERNAL_SERVER_ERROR);
-        }
+        List<Recipe> recipes = homebrewDao.findAll(limit, offset);
+        buildResponse(Response.Status.OK, recipes);
 
         return response;
     }
 
+    /**
+     * Fetch a single recipe
+     * @param id
+     * @return
+     */
     @GET
     @Timed
     @Path("/{id}")
     public Response getRecipeById(@PathParam("id") long id){
 
         // TODO: Handle 404.
-        return buildResponse(Response.Status.OK, homebrewDao.findById(id));
+        Response response;
+
+        Recipe recipe = homebrewDao.findById(id);
+        if(recipe == null){
+            // TODO: Return an error message type as the entity.
+            response = buildResponse(Response.Status.NOT_FOUND);
+        }else{
+            response = buildResponse(Response.Status.OK, homebrewDao.findById(id));
+        }
+        return response;
     }
 
     @DELETE

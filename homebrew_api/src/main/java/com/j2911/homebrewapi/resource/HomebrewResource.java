@@ -18,7 +18,7 @@ public class HomebrewResource {
     /**
      * Populates the headers w/ cors headers
      * TODO: Is there a better way to handle cors now?
-     *
+     * TODO: Error message type.
      * @param status
      * @param entity
      * @return

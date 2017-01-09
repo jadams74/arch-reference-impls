@@ -37,8 +37,16 @@ public interface HomebrewDao {
             "other_ingredients jsonb);")
     void createRecipeTable();
 
-    @SqlQuery("select * from homebrew.recipe")
-    List<Recipe> findAll();
+    /**
+     * This will become a performance bottleneck once the data is large. At minimum
+     * create an index.
+     * @param limit
+     * @param offset
+     * @return
+     */
+    @SqlQuery("SELECT * FROM homebrew.recipe LIMIT :limit OFFSET :offset")
+    List<Recipe> findAll(@Bind("limit") int limit,
+                         @Bind("offset") int offset);
 
     @SqlQuery("select * from homebrew.recipe where id = :id")
     Recipe findById(@Bind("id") long id);

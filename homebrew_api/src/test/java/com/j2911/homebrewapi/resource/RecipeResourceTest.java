@@ -70,5 +70,28 @@ public class RecipeResourceTest {
     @Test
     public void getRecipeById_NotFound(){
 
+        when(dao.findById(2)).thenReturn(null);
+
+        Response response = resource.client()
+                .target("/recipes/2")
+                .request()
+                .get(Response.class);
+
+        assertEquals(404, response.getStatus());
+    }
+
+    @Test
+    public void getRecipes_happyPath() {
+        assertFalse(true);
+    }
+
+    @Test
+    public void getRecipes_moreDataThanLimit(){
+        assertFalse(true);
+    }
+
+    @Test
+    public void getRecipes_offsetNotZero(){
+        assertFalse(true);
     }
 }

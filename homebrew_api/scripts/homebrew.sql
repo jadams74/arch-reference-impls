@@ -1,0 +1,2 @@
+CREATE DATABASE homebrew;
+CREATE SCHEMA IF NOT EXISTS homebrew;
