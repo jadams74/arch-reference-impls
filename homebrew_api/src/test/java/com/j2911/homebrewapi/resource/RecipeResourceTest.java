@@ -4,7 +4,11 @@ import com.j2911.homebrewapi.core.Recipe;
 import com.j2911.homebrewapi.db.HomebrewDao;
 import io.dropwizard.testing.junit.ResourceTestRule;
 import org.junit.*;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 import javax.ws.rs.core.MultivaluedMap;
@@ -12,6 +16,7 @@ import javax.ws.rs.core.Response;
 
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("unchecked")
 public class RecipeResourceTest {
 
     private final static HomebrewDao dao = mock(HomebrewDao.class);
@@ -80,18 +85,51 @@ public class RecipeResourceTest {
         assertEquals(404, response.getStatus());
     }
 
+
+    private List<Recipe> buildMockRecipeList(int start, int count){
+        List<Recipe> recipes = new ArrayList<>();
+
+        for (int i = 0; i < count; i++){
+            Recipe r = new Recipe();
+            r.setId(i + start);
+            r.setName(String.format("test%d", i));
+            recipes.add(r);
+        }
+
+        return recipes;
+    }
+
+    /**
+     * Perfect example of why integration tests are necessary. Any mocking I do here cannot test this feature.
+     */
     @Test
-    public void getRecipes_happyPath() {
-        assertFalse(true);
+    public void getRecipes_defaults() {
+        when(dao.findAll(eq(20), eq(0))).thenReturn(buildMockRecipeList(0, 20));
+
+        Response response = resource.client()
+                .target("/recipes")
+                .request()
+                .get(Response.class);
+
+        assertEquals(200, response.getStatus());
+
+        List<Recipe> recipes = response.readEntity(List.class);
+        assertEquals(20, recipes.size());
     }
 
     @Test
-    public void getRecipes_moreDataThanLimit(){
-        assertFalse(true);
-    }
+    public void getRecipes_paging(){
+        when(dao.findAll(eq(5), eq(1))).thenReturn(buildMockRecipeList(1, 5));
 
-    @Test
-    public void getRecipes_offsetNotZero(){
-        assertFalse(true);
+        Response response = resource.client()
+                .target("/recipes?limit=5&offset=1")
+                .request()
+                .get(Response.class);
+
+        assertEquals(200, response.getStatus());
+
+        List<Map<String, Object>> recipes = response.readEntity(List.class);
+        assertEquals(5, recipes.size());
+        assertEquals(1, recipes.get(0).get("id"));
     }
 }

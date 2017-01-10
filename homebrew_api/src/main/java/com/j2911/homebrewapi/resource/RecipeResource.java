@@ -42,12 +42,9 @@ public class RecipeResource extends HomebrewResource {
     @Timed
     public Response getRecipes(@QueryParam("limit") @DefaultValue("20") int limit,
                                @QueryParam("offset") @DefaultValue("0") int offset){
-        Response response = null;
 
         List<Recipe> recipes = homebrewDao.findAll(limit, offset);
-        buildResponse(Response.Status.OK, recipes);
-
-        return response;
+        return buildResponse(Response.Status.OK, recipes);
     }
 
     /**
