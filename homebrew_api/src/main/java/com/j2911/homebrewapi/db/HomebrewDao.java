@@ -19,8 +19,10 @@ public interface HomebrewDao {
     /**
      * Create the recipe table.
      */
-    @SqlUpdate("create table if not exists homebrew.recipe (id BIGSERIAL primary key, " +
+    @SqlUpdate("create table if not exists homebrew.recipe (" +
+            "id BIGSERIAL primary key, " +
             "created_at timestamp, " +
+            "updated_at timestamp, " +
             "name varchar(128) NOT NULL, " +
             "description text, " +
             "og numeric(4, 3), " +
@@ -54,7 +56,9 @@ public interface HomebrewDao {
     @SqlUpdate("delete from homebrew.recipe where id= :id")
     void deleteById(@Bind("id") long id);
 
-    @SqlUpdate("insert into homebrew.recipe (timestamp," +
+    @SqlUpdate("insert into homebrew.recipe (" +
+            "created_at," +
+            "updatd_at," +
             "name" +
             "description" +
             "og" +
@@ -69,7 +73,9 @@ public interface HomebrewDao {
             "hops" +
             "yeast" +
             "other_ingredients" +
-            ") values (:timestamp," +
+            ") values (" +
+            ":createdAt," +
+            ":updatedAt," +
             "name:" +
             "description:" +
             "og:" +
@@ -84,7 +90,8 @@ public interface HomebrewDao {
             "hops:" +
             "yeast:" +
             "otherIngredients)")
-    long insert(@Bind("timestamp") DateTime timestamp,
+    long insert(@Bind("createdAt") DateTime createdAt,
+                @Bind("updatedAt") DateTime updatedAt,
                   @Bind("name") String name,
                   @Bind("description") String description,
                   @Bind("og") float og,

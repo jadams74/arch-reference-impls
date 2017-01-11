@@ -101,6 +101,7 @@ public class RecipeResourceTest {
 
     /**
      * Perfect example of why integration tests are necessary. Any mocking I do here cannot test this feature.
+     * e.g., there are 20 records in the db, but I only want 10.
      */
     @Test
     public void getRecipes_defaults() {

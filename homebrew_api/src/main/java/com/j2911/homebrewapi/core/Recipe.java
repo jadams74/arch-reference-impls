@@ -10,28 +10,66 @@ import java.util.List;
  */
 public class Recipe {
     private long id;
+    private String createdAt;
+    private String updatedAt;
     private String name;
     private String description;
-    private String originalGravity;
-    private String finalGravity;
-    private String internationalBitternessUnits;
-    private String standardReferenceMethod;
-    private String alcoholByVolume;
+    private double originalGravity;
+    private double finalGravity;
+    private int internationalBitternessUnits;
+    private int standardReferenceMethod;
+    private double alcoholByVolume;
     private String style;
     private String recipeType;
-    private String boilTime;
+    private int boilTime;
     private List<String> fermentables;
     private List<String> hops;
     private List<String> yeast;
     private List<String> otherIngredients;
 
     public Recipe(){
-        this.fermentables = new ArrayList<String>();
-        this.hops = new ArrayList<String>();
-        this.yeast = new ArrayList<String>();
-        this.otherIngredients = new ArrayList<String>();
+        this.fermentables = new ArrayList<>();
+        this.hops = new ArrayList<>();
+        this.yeast = new ArrayList<>();
+        this.otherIngredients = new ArrayList<>();
     }
 
+    public Recipe(long id,
+                  String createdAt,
+                  String updatedAt,
+                  String name,
+                  String description,
+                  double originalGravity,
+                  double finalGravity,
+                  int internationalBitternessUnits,
+                  int standardReferenceMethod,
+                  double alcoholByVolume,
+                  String style,
+                  String recipeType,
+                  int boilTime,
+                  List<String> fermentables,
+                  List<String> hops,
+                  List<String> yeast,
+                  List<String> otherIngredients) {
+
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.name = name;
+        this.description = description;
+        this.originalGravity = originalGravity;
+        this.finalGravity = finalGravity;
+        this.internationalBitternessUnits = internationalBitternessUnits;
+        this.standardReferenceMethod = standardReferenceMethod;
+        this.alcoholByVolume = alcoholByVolume;
+        this.style = style;
+        this.recipeType = recipeType;
+        this.boilTime = boilTime;
+        this.fermentables = fermentables;
+        this.hops = hops;
+        this.yeast = yeast;
+        this.otherIngredients = otherIngredients;
+    }
 
     public long getId() {
         return id;
@@ -39,6 +77,22 @@ public class Recipe {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getName() {
@@ -57,43 +111,43 @@ public class Recipe {
         this.description = description;
     }
 
-    public String getOriginalGravity() {
+    public double getOriginalGravity() {
         return originalGravity;
     }
 
-    public void setOriginalGravity(String originalGravity) {
+    public void setOriginalGravity(double originalGravity) {
         this.originalGravity = originalGravity;
     }
 
-    public String getFinalGravity() {
+    public double getFinalGravity() {
         return finalGravity;
     }
 
-    public void setFinalGravity(String finalGravity) {
+    public void setFinalGravity(double finalGravity) {
         this.finalGravity = finalGravity;
     }
 
-    public String getInternationalBitternessUnits() {
+    public int getInternationalBitternessUnits() {
         return internationalBitternessUnits;
     }
 
-    public void setInternationalBitternessUnits(String internationalBitternessUnits) {
+    public void setInternationalBitternessUnits(int internationalBitternessUnits) {
         this.internationalBitternessUnits = internationalBitternessUnits;
     }
 
-    public String getStandardReferenceMethod() {
+    public int getStandardReferenceMethod() {
         return standardReferenceMethod;
     }
 
-    public void setStandardReferenceMethod(String standardReferenceMethod) {
+    public void setStandardReferenceMethod(int standardReferenceMethod) {
         this.standardReferenceMethod = standardReferenceMethod;
     }
 
-    public String getAlcoholByVolume() {
+    public double getAlcoholByVolume() {
         return alcoholByVolume;
     }
 
-    public void setAlcoholByVolume(String alcoholByVolume) {
+    public void setAlcoholByVolume(double alcoholByVolume) {
         this.alcoholByVolume = alcoholByVolume;
     }
 
@@ -113,11 +167,11 @@ public class Recipe {
         this.recipeType = recipeType;
     }
 
-    public String getBoilTime() {
+    public int getBoilTime() {
         return boilTime;
     }
 
-    public void setBoilTime(String boilTime) {
+    public void setBoilTime(int boilTime) {
         this.boilTime = boilTime;
     }
 
@@ -161,21 +215,18 @@ public class Recipe {
         Recipe recipe = (Recipe) o;
 
         if (id != recipe.id) return false;
+        if (Double.compare(recipe.originalGravity, originalGravity) != 0) return false;
+        if (Double.compare(recipe.finalGravity, finalGravity) != 0) return false;
+        if (internationalBitternessUnits != recipe.internationalBitternessUnits) return false;
+        if (standardReferenceMethod != recipe.standardReferenceMethod) return false;
+        if (Double.compare(recipe.alcoholByVolume, alcoholByVolume) != 0) return false;
+        if (boilTime != recipe.boilTime) return false;
+        if (createdAt != null ? !createdAt.equals(recipe.createdAt) : recipe.createdAt != null) return false;
+        if (updatedAt != null ? !updatedAt.equals(recipe.updatedAt) : recipe.updatedAt != null) return false;
         if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
         if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
-        if (originalGravity != null ? !originalGravity.equals(recipe.originalGravity) : recipe.originalGravity != null)
-            return false;
-        if (finalGravity != null ? !finalGravity.equals(recipe.finalGravity) : recipe.finalGravity != null)
-            return false;
-        if (internationalBitternessUnits != null ? !internationalBitternessUnits.equals(recipe.internationalBitternessUnits) : recipe.internationalBitternessUnits != null)
-            return false;
-        if (standardReferenceMethod != null ? !standardReferenceMethod.equals(recipe.standardReferenceMethod) : recipe.standardReferenceMethod != null)
-            return false;
-        if (alcoholByVolume != null ? !alcoholByVolume.equals(recipe.alcoholByVolume) : recipe.alcoholByVolume != null)
-            return false;
         if (style != null ? !style.equals(recipe.style) : recipe.style != null) return false;
         if (recipeType != null ? !recipeType.equals(recipe.recipeType) : recipe.recipeType != null) return false;
-        if (boilTime != null ? !boilTime.equals(recipe.boilTime) : recipe.boilTime != null) return false;
         if (fermentables != null ? !fermentables.equals(recipe.fermentables) : recipe.fermentables != null)
             return false;
         if (hops != null ? !hops.equals(recipe.hops) : recipe.hops != null) return false;
@@ -186,17 +237,24 @@ public class Recipe {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result;
+        long temp;
+        result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (originalGravity != null ? originalGravity.hashCode() : 0);
-        result = 31 * result + (finalGravity != null ? finalGravity.hashCode() : 0);
-        result = 31 * result + (internationalBitternessUnits != null ? internationalBitternessUnits.hashCode() : 0);
-        result = 31 * result + (standardReferenceMethod != null ? standardReferenceMethod.hashCode() : 0);
-        result = 31 * result + (alcoholByVolume != null ? alcoholByVolume.hashCode() : 0);
+        temp = Double.doubleToLongBits(originalGravity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(finalGravity);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + internationalBitternessUnits;
+        result = 31 * result + standardReferenceMethod;
+        temp = Double.doubleToLongBits(alcoholByVolume);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (style != null ? style.hashCode() : 0);
         result = 31 * result + (recipeType != null ? recipeType.hashCode() : 0);
-        result = 31 * result + (boilTime != null ? boilTime.hashCode() : 0);
+        result = 31 * result + boilTime;
         result = 31 * result + (fermentables != null ? fermentables.hashCode() : 0);
         result = 31 * result + (hops != null ? hops.hashCode() : 0);
         result = 31 * result + (yeast != null ? yeast.hashCode() : 0);
@@ -208,16 +266,18 @@ public class Recipe {
     public String toString() {
         return "Recipe{" +
                 "id=" + id +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", originalGravity='" + originalGravity + '\'' +
-                ", finalGravity='" + finalGravity + '\'' +
-                ", internationalBitternessUnits='" + internationalBitternessUnits + '\'' +
-                ", standardReferenceMethod='" + standardReferenceMethod + '\'' +
-                ", alcoholByVolume='" + alcoholByVolume + '\'' +
+                ", originalGravity=" + originalGravity +
+                ", finalGravity=" + finalGravity +
+                ", internationalBitternessUnits=" + internationalBitternessUnits +
+                ", standardReferenceMethod=" + standardReferenceMethod +
+                ", alcoholByVolume=" + alcoholByVolume +
                 ", style='" + style + '\'' +
                 ", recipeType='" + recipeType + '\'' +
-                ", boilTime='" + boilTime + '\'' +
+                ", boilTime=" + boilTime +
                 ", fermentables=" + fermentables +
                 ", hops=" + hops +
                 ", yeast=" + yeast +

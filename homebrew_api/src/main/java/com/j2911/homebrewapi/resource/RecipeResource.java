@@ -57,7 +57,6 @@ public class RecipeResource extends HomebrewResource {
     @Path("/{id}")
     public Response getRecipeById(@PathParam("id") long id){
 
-        // TODO: Handle 404.
         Response response;
 
         Recipe recipe = homebrewDao.findById(id);
@@ -86,5 +85,11 @@ public class RecipeResource extends HomebrewResource {
         }
 
         return response;
+    }
+
+    @POST
+    @Timed
+    public Response createRecipe(Recipe recipe){
+        return Response.ok().build();
     }
 }
