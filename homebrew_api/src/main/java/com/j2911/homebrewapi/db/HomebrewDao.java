@@ -3,6 +3,7 @@ package com.j2911.homebrewapi.db;
 import com.j2911.homebrewapi.core.Recipe;
 import org.joda.time.DateTime;
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
@@ -90,7 +91,8 @@ public interface HomebrewDao {
             "hops:" +
             "yeast:" +
             "otherIngredients)")
-    long insert(@Bind("createdAt") DateTime createdAt,
+    @GetGeneratedKeys(RecipeMapper.class)
+    Recipe insert(@Bind("createdAt") DateTime createdAt,
                 @Bind("updatedAt") DateTime updatedAt,
                   @Bind("name") String name,
                   @Bind("description") String description,

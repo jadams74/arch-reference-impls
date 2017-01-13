@@ -1,16 +1,24 @@
 package com.j2911.homebrewapi.resource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.j2911.homebrewapi.core.Recipe;
 import com.j2911.homebrewapi.db.HomebrewDao;
 import io.dropwizard.testing.junit.ResourceTestRule;
+import org.apache.maven.surefire.shade.org.apache.commons.io.IOUtils;
+import org.joda.time.DateTime;
 import org.junit.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
@@ -132,5 +140,49 @@ public class RecipeResourceTest {
         List<Map<String, Object>> recipes = response.readEntity(List.class);
         assertEquals(5, recipes.size());
         assertEquals(1, recipes.get(0).get("id"));
+    }
+
+    @Test
+    public void postRecipe_happyPath() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(100L);
+
+        when(dao.insert(
+                any(DateTime.class),
+                any(DateTime.class),
+                anyString(),
+                anyString(),
+                anyFloat(),
+                anyFloat(),
+                anyShort(),
+                anyShort(),
+                anyShort(),
+                anyString(),
+                anyString(),
+                anyShort(),
+                anyString(),
+                anyString(),
+                anyString(),
+                anyString()
+        )).thenReturn(recipe);
+
+        String requestBody = loadJsonFromResources("recipe.json");
+
+        Response response = resource.client()
+                .target("/recipes")
+                .request()
+                .post(Entity.entity(requestBody, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(201, response.getStatus());
+
+        String location = response.getHeaders().get("location").get(0).toString();
+        assertEquals("http://localhost:9998/recipes/" + recipe.getId(), location);
+    }
+
+
+    private String loadJsonFromResources(String fileName) throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream stream = classLoader.getResource(fileName).openStream();
+        return IOUtils.toString(stream);
     }
 }

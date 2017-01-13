@@ -3,10 +3,12 @@ package com.j2911.homebrewapi.resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 
 import com.codahale.metrics.annotation.Timed;
 import com.j2911.homebrewapi.db.HomebrewDao;
 import com.j2911.homebrewapi.core.Recipe;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,6 +92,28 @@ public class RecipeResource extends HomebrewResource {
     @POST
     @Timed
     public Response createRecipe(Recipe recipe){
-        return Response.ok().build();
+
+        final Recipe newRecipe = homebrewDao.insert(DateTime.now(),
+                DateTime.now(),
+                recipe.getName(),
+                recipe.getDescription(),
+                (float)recipe.getOriginalGravity(),
+                (float)recipe.getFinalGravity(),
+                (short)recipe.getInternationalBitternessUnits(),
+                (short)recipe.getStandardReferenceMethod(),
+                (short)recipe.getAlcoholByVolume(),
+                recipe.getStyle(),
+                recipe.getRecipeType(),
+                (short)recipe.getBoilTime(),
+                jsonArrayToString(recipe.getFermentables()),
+                jsonArrayToString(recipe.getHops()),
+                jsonArrayToString(recipe.getYeast()),
+                jsonArrayToString(recipe.getOtherIngredients()));
+
+
+        return Response
+                .created(UriBuilder.fromPath("/recipes/{id}").build(newRecipe.getId()))
+                .build();
+
     }
 }
