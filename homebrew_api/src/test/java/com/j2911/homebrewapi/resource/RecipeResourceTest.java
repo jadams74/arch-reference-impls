@@ -1,5 +1,6 @@
 package com.j2911.homebrewapi.resource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.j2911.homebrewapi.ResourceTestFile;
 import com.j2911.homebrewapi.core.Recipe;
 import com.j2911.homebrewapi.db.HomebrewDao;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.*;
 public class RecipeResourceTest {
 
     private final static HomebrewDao mockDao = mock(HomebrewDao.class);
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @ClassRule
     public final static ResourceTestRule resourceMock = ResourceTestRule.builder()
@@ -48,7 +50,6 @@ public class RecipeResourceTest {
 
         reset(mockDao);
         reset(spyDao);
-
     }
 
     @Test
@@ -231,4 +232,38 @@ public class RecipeResourceTest {
         verify(spyDao, times(1)).findById(1L);
         verify(spyDao, times(0)).deleteById(1L);
     }
+
+    @Test
+    public void update_happyPath() throws Exception{
+        long id = 11L;
+        Recipe recipe = new Recipe();
+        recipe.setId(id);
+
+        when(mockDao.update(anyLong(),
+                any(DateTime.class),
+                anyString(),
+                anyString(),
+                anyFloat(),
+                anyFloat(),
+                anyShort(),
+                anyShort(),
+                anyFloat(),
+                anyString(),
+                anyString(),
+                anyShort(),
+                anyString(),
+                anyString(),
+                anyString(),
+                anyString())).thenReturn(recipe);
+
+        Response response = resourceMock.client()
+                .target("/recipes")
+                .request()
+                .put(Entity.entity(objectMapper.writeValueAsString(recipe), MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(200, response.getStatus());
+        Recipe result = response.readEntity(Recipe.class);
+        assertEquals(id, result.getId());
+    }
+
 }

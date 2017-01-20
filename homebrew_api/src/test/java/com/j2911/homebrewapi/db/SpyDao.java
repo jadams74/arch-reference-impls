@@ -36,7 +36,12 @@ public class SpyDao implements HomebrewDao {
     }
 
     @Override
-    public Recipe insert(@Bind("createdAt") DateTime createdAt, @Bind("updatedAt") DateTime updatedAt, @Bind("name") String name, @Bind("description") String description, @Bind("og") float og, @Bind("fg") float fg, @Bind("ibu") short ibu, @Bind("srm") short srm, @Bind("abv") short abv, @Bind("style") String style, @Bind("recipeType") String recipeType, @Bind("boilTime") short boilTime, @BindJsonb("fermentables") String fermentables, @BindJsonb("hops") String hops, @BindJsonb("yeast") String yeast, @BindJsonb("otherIngredients") String otherIngredients) {
+    public Recipe insert(@Bind("createdAt") DateTime createdAt, @Bind("updatedAt") DateTime updatedAt, @Bind("name") String name, @Bind("description") String description, @Bind("og") float og, @Bind("fg") float fg, @Bind("ibu") short ibu, @Bind("srm") short srm, @Bind("abv") float abv, @Bind("style") String style, @Bind("recipeType") String recipeType, @Bind("boilTime") short boilTime, @BindJsonb("fermentables") String fermentables, @BindJsonb("hops") String hops, @BindJsonb("yeast") String yeast, @BindJsonb("otherIngredients") String otherIngredients) {
+        return null;
+    }
+
+    @Override
+    public Recipe update(@Bind("id") long id, @Bind("updatedAt") DateTime updatedAt, @Bind("name") String name, @Bind("description") String description, @Bind("og") float og, @Bind("fg") float fg, @Bind("ibu") short ibu, @Bind("srm") short srm, @Bind("abv") float abv, @Bind("style") String style, @Bind("recipeType") String recipeType, @Bind("boilTime") short boilTime, @BindJsonb("fermentables") String fermentables, @BindJsonb("hops") String hops, @BindJsonb("yeast") String yeast, @BindJsonb("otherIngredients") String otherIngredients) {
         return null;
     }
 }

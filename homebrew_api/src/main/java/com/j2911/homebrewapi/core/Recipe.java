@@ -1,5 +1,8 @@
 package com.j2911.homebrewapi.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,18 +12,20 @@ import java.util.List;
  * arbitrary object.
  */
 public class Recipe {
+    private static Logger LOG = LoggerFactory.getLogger(Recipe.class);
+
     private long id;
-    private String createdAt;
-    private String updatedAt;
-    private String name;
-    private String description;
+    private String createdAt = "";
+    private String updatedAt = "";
+    private String name = "";
+    private String description = "";
     private double originalGravity;
     private double finalGravity;
     private int internationalBitternessUnits;
     private int standardReferenceMethod;
     private double alcoholByVolume;
-    private String style;
-    private String recipeType;
+    private String style = "";
+    private String recipeType = "";
     private int boilTime;
     private List<String> fermentables;
     private List<String> hops;

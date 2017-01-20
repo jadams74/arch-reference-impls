@@ -100,7 +100,7 @@ public interface HomebrewDao {
                   @Bind("fg") float fg,
                   @Bind("ibu") short ibu,
                   @Bind("srm") short srm,
-                  @Bind("abv") short abv,
+                  @Bind("abv") float abv,
                   @Bind("style") String style,
                   @Bind("recipeType") String recipeType,
                   @Bind("boilTime") short boilTime,
@@ -109,4 +109,40 @@ public interface HomebrewDao {
                   @BindJsonb("yeast") String yeast,
                   @BindJsonb("otherIngredients") String otherIngredients
                   );
+
+    @SqlUpdate("UPDATE homebrew.recipe SET " +
+            "updated_at=:updatedAt, " +
+            "name=:name, " +
+            "description=:description, " +
+            "og=:og, " +
+            "fg=:fg, " +
+            "ibu=:ibu, " +
+            "srm=:srm, " +
+            "abv=:abv, " +
+            "style=:style, " +
+            "recipe_type=:recipeType," +
+            "boil_time=:boilTime, " +
+            "fermentables=:fermentables, " +
+            "hops=:hops, " +
+            "yeast=:yeast, " +
+            "other_ingredients:otherIngredients " +
+            "WHERE id=:id;")
+    @GetGeneratedKeys(RecipeMapper.class)
+    Recipe update(@Bind("id") long id,
+                  @Bind("updatedAt") DateTime updatedAt,
+                  @Bind("name") String name,
+                  @Bind("description") String description,
+                  @Bind("og") float og,
+                  @Bind("fg") float fg,
+                  @Bind("ibu") short ibu,
+                  @Bind("srm") short srm,
+                  @Bind("abv") float abv,
+                  @Bind("style") String style,
+                  @Bind("recipeType") String recipeType,
+                  @Bind("boilTime") short boilTime,
+                  @BindJsonb("fermentables") String fermentables,
+                  @BindJsonb("hops") String hops,
+                  @BindJsonb("yeast") String yeast,
+                  @BindJsonb("otherIngredients") String otherIngredients
+    );
 }

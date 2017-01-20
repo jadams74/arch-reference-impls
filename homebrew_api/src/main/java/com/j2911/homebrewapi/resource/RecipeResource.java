@@ -20,7 +20,7 @@ import java.util.List;
 @Path("/recipes")
 @Produces(MediaType.APPLICATION_JSON)
 public class RecipeResource extends HomebrewResource {
-    private static Logger logger = LoggerFactory.getLogger(RecipeResource.class);
+    private static Logger LOG = LoggerFactory.getLogger(RecipeResource.class);
     private HomebrewDao homebrewDao;
     public RecipeResource(){}
 
@@ -101,7 +101,7 @@ public class RecipeResource extends HomebrewResource {
                 (float)recipe.getFinalGravity(),
                 (short)recipe.getInternationalBitternessUnits(),
                 (short)recipe.getStandardReferenceMethod(),
-                (short)recipe.getAlcoholByVolume(),
+                (float)recipe.getAlcoholByVolume(),
                 recipe.getStyle(),
                 recipe.getRecipeType(),
                 (short)recipe.getBoilTime(),
@@ -115,5 +115,29 @@ public class RecipeResource extends HomebrewResource {
                 .created(UriBuilder.fromPath("/recipes/{id}").build(newRecipe.getId()))
                 .build();
 
+    }
+
+    @PUT
+    @Timed
+    public Response updateRecipe(Recipe recipe){
+
+        final Recipe updated = homebrewDao.update(recipe.getId(),
+                DateTime.now(),
+                recipe.getName(),
+                recipe.getDescription(),
+                (float) recipe.getOriginalGravity(),
+                (float) recipe.getFinalGravity(),
+                (short) recipe.getInternationalBitternessUnits(),
+                (short) recipe.getStandardReferenceMethod(),
+                (float) recipe.getAlcoholByVolume(),
+                recipe.getStyle(),
+                recipe.getRecipeType(),
+                (short)recipe.getBoilTime(),
+                jsonArrayToString(recipe.getFermentables()),
+                jsonArrayToString(recipe.getHops()),
+                jsonArrayToString(recipe.getYeast()),
+                jsonArrayToString(recipe.getOtherIngredients()));
+
+        return Response.ok(updated).build();
     }
 }
